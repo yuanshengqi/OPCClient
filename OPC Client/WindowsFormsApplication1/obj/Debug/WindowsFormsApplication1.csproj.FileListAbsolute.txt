@@ -1,0 +1,28 @@
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.ServerConnect.resources
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\Interop.OPCAutomation.dll
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.ResolveComReference.cache
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.AboutBox1.resources
+c:\users\jk\documents\visual studio 2013\Projects\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\Interop.OPCAutomation.dll
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.ResolveComReference.cache
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.AboutBox1.resources
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.ServerConnect.resources
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\ysq20\Documents\待开发OPC Client项目\新版\OPC Client\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
