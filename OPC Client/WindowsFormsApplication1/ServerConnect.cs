@@ -20,12 +20,7 @@ namespace WindowsFormsApplication1
         }
         #region 私有变量
 
-        //public OPCServer KepServer { get; set; }
-        //public OPCGroups kepGroups { get; set; }
-        //public OPCGroup KepGroup { get; set; }
-        //public OPCItem KepItem { get; set; }
-        //public OPCItems KepItems { get; set; }
-        //public bool opc_connected { get; set; }
+
         public static OPCServer KepServer;
         bool opc_connected = false;
         public static string strHostIP = "";
@@ -60,7 +55,7 @@ namespace WindowsFormsApplication1
                 foreach (string turn in (Array)serverList)
                 {
                     listBox1.Items.Add(turn);
-                    
+
                 }
             }
             catch (Exception err)
@@ -86,9 +81,9 @@ namespace WindowsFormsApplication1
                 KepServer.Connect(remoteServerName, remoteServerIP);
                 if (KepServer.ServerState == (int)OPCServerState.OPCRunning)
                 {
-                    
+
                     //  tsslServerState.Text = "已连接到：" + KepServer.ServerName + " ";
-                    
+
                 }
                 else
                 {
@@ -103,7 +98,7 @@ namespace WindowsFormsApplication1
             }
             return true;
         }
-  
+
         #endregion
 
         #region 事件触发
@@ -126,8 +121,6 @@ namespace WindowsFormsApplication1
                     return;
                 }
                 opc_connected = true;
-              
-               // MessageBox.Show("连接服务器" + textBox1.Text + " 成功！！！");
                 this.Hide();
 
 

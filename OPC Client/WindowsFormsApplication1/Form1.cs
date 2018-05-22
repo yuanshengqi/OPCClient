@@ -22,19 +22,22 @@ namespace WindowsFormsApplication1
         ListViewItem lv;
         ServerConnect sc1 = new ServerConnect();
         OPCServer server = ServerConnect.KepServer;
+
         OPCGroups kepGroups;
         OPCGroup KepGroup;
         OPCItem KepItem;
         OPCItems KepItems;
         List<String> list;
         bool connect = true;
-        int itmHandlerClient = 1234;
+        int itmHandlerClient=1234;
         int itmHandlerServer = 0;
         object value;
         object quality;
         object timestamp;
         private List<string> itemNames = new List<string>();
-        private Dictionary<string, string> itemValues = new Dictionary<string, string>();  
+        
+        private Dictionary<string, string> itemValues = new Dictionary<string, string>();
+        static  List<string> list1=null;
         #endregion
 
         /// <summary>
@@ -51,9 +54,10 @@ namespace WindowsFormsApplication1
                 KepGroup = kepGroups.Add("opcdontnetgroup" + DateTime.Now.ToString("yyyyMMddHHmmssfff"));
                 SetGroupProperty();
                 KepGroup.DataChange += new DIOPCGroupEvent_DataChangeEventHandler(KepGroup_DataChange);
+
                 KepGroup.AsyncWriteComplete += new DIOPCGroupEvent_AsyncWriteCompleteEventHandler(KepGroup_AsyncWriteComplete);
                 KepItems = KepGroup.OPCItems;
-              
+
 
             }
 
@@ -81,7 +85,7 @@ namespace WindowsFormsApplication1
             kepGroups.DefaultGroupDeadband = 0;
             KepGroup.IsActive = true;
             KepGroup.IsSubscribed = true;
-            KepGroup.UpdateRate = 250;
+            KepGroup.UpdateRate = 100;
         }
 
         /// <summary>
@@ -124,7 +128,7 @@ namespace WindowsFormsApplication1
                 TreeNode CountNode = new TreeNode(root);
                 treeView1.Nodes.Add(CountNode);
 
-                
+
                 try
                 {
                     // ShowListView();
@@ -133,6 +137,8 @@ namespace WindowsFormsApplication1
                     LoadDataToTree(browser, treeView1.Nodes[0].Nodes);
                     list = RecurBrowse(browser);
                     changeToolStrip();
+
+
 
                 }
                 catch (Exception err)
@@ -143,7 +149,7 @@ namespace WindowsFormsApplication1
             }
         }
         /// <summary>
-        /// 获取所有节点的所有值，显示在listview中
+        /// 获取节点的所有值，显示在listview中
         /// </summary>
         private void ShowListView()
         {
@@ -155,7 +161,7 @@ namespace WindowsFormsApplication1
             object value;
             object quality;
             object timestamp;
-            itmHandlerClient = 1234;
+            //itmHandlerClient = 1234;
             OPCBrowser opcbrowser = ServerConnect.KepServer.CreateBrowser();
             list = RecurBrowse(opcbrowser);
             for (int i = 0; i < list.Count; i++)
@@ -233,6 +239,7 @@ namespace WindowsFormsApplication1
             //}
         }
 
+
         /// <summary>
         /// 每当数据有变化时，执行的事件
         /// </summary>
@@ -244,29 +251,50 @@ namespace WindowsFormsApplication1
         /// <param name="TimeStamps">时间戳</param>
         void KepGroup_DataChange(int TransactionID, int NumItems, ref Array ClientHandles, ref Array ItemValues, ref Array Qualities, ref Array TimeStamps)
         {
-            for (int i = 1; i <= NumItems; i++)
-            {
-                itemValues[itemNames[Convert.ToInt32(ClientHandles.GetValue(i)) - 1]] = ItemValues.GetValue(i).ToString();
-            }  
-        }
+            Console.WriteLine("********" + TransactionID.ToString() + NumItems.ToString() + "*********");
+            //for (int i = 1; i <= NumItems; i++)
+            //{
+            //    string number = itemNames[Convert.ToInt32(ClientHandles.GetValue(i)) - 1];
+            //    itemValues[number] = ItemValues.GetValue(i).ToString();
+            //    Console.WriteLine(itemValues[number] + "....." + number);
 
-        /// <summary>
-        /// 写入
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnWrite_Click(object sender, EventArgs e)
-        {
-            OPCItem bItem = KepItems.GetOPCItem(itmHandlerServer);
-            int[] temp = new int[2] { 0, bItem.ServerHandle };
-            Array serverHandles = (Array)temp;
-            object[] valueTemp = new object[2] { "", 12 };
-            Array values = (Array)valueTemp;
-            Array Errors;
-            int CancelID;
-            KepGroup.AsyncWrite(1, ref serverHandles, ref values, out Errors, 2017, out CancelID);
-            GC.Collect();
+            //}
+            //for (int i = 0; i <= NumItems; i++)
+            //{
+            //    //string name = itemNames[Convert.ToInt32(ClientHandles.GetValue(i))];
+            //   // string name = itemNames[i-1];
+                
+            //        //int index = listView1.Columns[itemNames[i - 1]].Index;
+            //        ////this.toolStripTextBox1.Text = ItemValues.GetValue(i).ToString();
+            //        ////this.toolStripTextBox2.Text = Qualities.GetValue(i).ToString();
+            //        ////this.toolStripTextBox3.Text = TimeStamps.GetValue(i).ToString();
+            //        //listView1.Items[index].SubItems["value"].Text = ItemValues.GetValue(i).ToString();
+            //        //listView1.Items[index].SubItems["status"].Text = Qualities.GetValue(i).ToString();
+            //        //listView1.Items[index].SubItems["Time"].Text = TimeStamps.GetValue(i).ToString();
+           // int index = listView1.Columns[itemNames[0]].Index;
+          if(NumItems>0)
+          {
+              for (int i = 0; i < NumItems;i++ )
+              {
+                 // Console.WriteLine(itemNames[i]);
+                  Console.WriteLine(listView1.Items[i].SubItems[tag.Index].Text);
+                  listView1.Items[i].SubItems[Value.Index].Text = ItemValues.GetValue(i+1).ToString();
+                  listView1.Items[i].SubItems[status.Index].Text = Qualities.GetValue(i+1).ToString();
+                  listView1.Items[i].SubItems[Time.Index].Text = TimeStamps.GetValue(i+1).ToString();
+                  Console.WriteLine(listView1.Items[i].SubItems[Value.Index].Text);
+                  Console.WriteLine(listView1.Items[i].SubItems[status.Index].Text);
+                  Console.WriteLine(listView1.Items[i].SubItems[Time.Index].Text);
+                  //int index = listView1.Columns[itemNames[i]].Index;
+                  //listView1.Items[index].SubItems["value"].Text = ItemValues.GetValue(i).ToString();
+                  //listView1.Items[index].SubItems["status"].Text = Qualities.GetValue(i).ToString();
+                  //listView1.Items[index].SubItems["Time"].Text = TimeStamps.GetValue(i).ToString();
+              }
+          }
+               
+            //}  
         }
+    
+
 
         private void 连接ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -312,7 +340,7 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
 
-
+            list1 = new List<string>();
         }
 
         #endregion
@@ -325,28 +353,7 @@ namespace WindowsFormsApplication1
         /// <param name="e"></param>
         private void listView1_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (itmHandlerClient != 0)
-            //    {
-            //        Array Errors;
-            //        OPCItem bItem = KepItems.GetOPCItem(itmHandlerServer);
-            //        int[] temp = new int[2] { 0, bItem.ServerHandle };
-            //        Array serverHandle = (Array)temp;
-            //        KepItems.Remove(KepItems.Count, ref serverHandle, out Errors);
-            //    }
-            //    itmHandlerClient = 1234;
-            //    KepItem = KepItems.AddItem(this.listView1.SelectedItems[0].Text, itmHandlerClient);
-            //    itmHandlerServer = KepItem.ServerHandle;
 
-            //}
-            //catch (Exception err)
-            //{
-            //    //没有任何权限的项，都是opc服务器保留的系统项，此处不做任何处理。
-            //    itmHandlerClient = 0;
-
-            //    MessageBox.Show("此项为保留项：" + err.Message, "提示信息");
-            //}
 
         }
 
@@ -356,39 +363,87 @@ namespace WindowsFormsApplication1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public event TreeNodeMouseClickEventHandler NodeMouseDoubleClick;
-        
 
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+              
+            string itemName1 = getFullName(treeView1);
+            //if (listView1.Items.IndexOfKey(itemName1) < 0)
+            if (listView1.Items.IndexOfKey(itemName1) < 0)
+            {
+                ShowData(itemName1);
+                list1.Add(itemName1);
+                
+            }
 
-            string itemName = e.Node.FullPath;
-            string delname = treeView1.Nodes[0].FullPath + ".";
-            string itemName1 = itemName.ToString().Replace(delname, "");
+            else
+            {
+                MessageBox.Show("你已经选择过该项目，请直接在listview中查看即可。","提示");
+            }
+            //foreach (var item in list1)
+            //{
+            //    Console.WriteLine(item);
+            //}
+          
 
-            KepItem = KepItems.AddItem(itemName1, itmHandlerClient);
+            Timer timer1 = new Timer();
+            timer1.Enabled = true;
+            timer1.Tick += timer1_Tick;
+            timer1.Interval = 50000;
+
+
+
+        }
+        /// <summary>
+        /// 获取所选treeview的完整itemname
+        /// </summary>
+        /// <param name="treeview1"></param>
+        /// <returns></returns>
+        public string getFullName(TreeView treeview1)
+        {
+            string fullname1 = treeView1.SelectedNode.FullPath;
+            string fullname2 = treeView1.Nodes[0].FullPath + ".";
+            string fullname = fullname1.ToString().Replace(fullname2, "");
+            return fullname;
+        }
+        /// <summary>
+        /// 通过itemname来获取相应的value值和时间并展示在listview中
+        /// </summary>
+        /// <param name="node"></param>
+        public void ShowData(string node)
+        {
+            itemNames.Add(node);
+            //itmHandlerClient = ++itmHandlerClient;
+            KepItem = KepItems.AddItem(node, itmHandlerClient);
             itmHandlerServer = KepItem.ServerHandle;
             KepItem.Read(1, out value, out quality, out timestamp);
-            lv = new ListViewItem(itemName1);
+            listView1.BeginUpdate();
+            lv = new ListViewItem(node);
+            lv.Name = node;
             lv.SubItems.Add(Convert.ToString(value));
             lv.SubItems.Add(quality.ToString());
             lv.SubItems.Add(timestamp.ToString());
             listView1.Items.Add(lv);
-
+            listView1.EndUpdate();
         }
-        /// <summary>
-        /// Treeview中获取当前节点的完整名称并返回。
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        ///
-        public string GetFullName()
-        {
-            String Fullname = null;
+        //public void ShowData(string[] node)
+        //{
+        //    listView1.BeginUpdate();
+        //    for (int i = 0; i < node.Length; i++) { 
+        //        KepItem = KepItems.AddItem(node[i], itmHandlerClient);
+        //    itmHandlerServer = KepItem.ServerHandle;
+        //    KepItem.Read(1, out value, out quality, out timestamp);
+           
+        //    lv = new ListViewItem(node[i]);
+        //    lv.Name = node[i];
+        //    lv.SubItems.Add(Convert.ToString(value));
+        //    lv.SubItems.Add(quality.ToString());
+        //    lv.SubItems.Add(timestamp.ToString());
+        //    listView1.Items.Add(lv);
+        //    }
+        //    listView1.EndUpdate();
+        //}
 
-
-            return Fullname;
-        }
         #endregion
         /// <summary>
         /// 断开连接，执行事件
@@ -410,33 +465,70 @@ namespace WindowsFormsApplication1
                 }
                 changeToolStrip1();
 
-                treeView1.Refresh();
-                listView1.Clear();
-
+                treeView1.Nodes.Clear();
+                listView1.Items.Clear();
+                timer1.Enabled = false;
             }
             catch (Exception err)
             {
 
                 MessageBox.Show(err.Message);
             }
-
-
-
-
-
-
-
-
         }
-
+        /// <summary>
+        /// 右键写入value值。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void 写ItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OPCItem bItem = KepItems.GetOPCItem(itmHandlerServer);
+            int[] temp = new int[2] { 0, bItem.ServerHandle };
+            Array serverHandles = (Array)temp;
+            object[] valueTemp = new object[2] { "", toolStripTextBox1.Text };
+            Array values = (Array)valueTemp;
+            Array Errors;
+            int CancelID;
+            KepGroup.AsyncWrite(1, ref serverHandles, ref values, out Errors, 2017, out CancelID);
+            GC.Collect();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            listView1.Refresh();
+            if (KepGroup != null)
+            {
+
+                //KepItem.Read((short)OPCDataSource.OPCDevice, out value, out quality, out timestamp);
+
+
+                listView1.Refresh();
+            }
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //string itemName1 = getFullName(treeView1);
+           
+
+            //if (listView1.Items.Count > 1 && listView1.Items.ContainsKey(itemName1))
+            //{
+            //    listView1.Items.Clear();
+            //    foreach (string s in list1)
+            //    {
+            //        ShowData(s);
+            //    }
+            //}
+            //else
+            //{
+            //    listView1.Items.Clear();
+            //     itemName1 = getFullName(treeView1);
+            //    ShowData(itemName1);
+
+            //}
+
+
+
         }
 
 
